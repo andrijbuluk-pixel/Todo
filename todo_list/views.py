@@ -6,6 +6,7 @@ from todo_list.forms import (
     TagForm,
     TagCreatedForm,
     TaskCreatedForm,
+    TaskUpdateForm,
 )
 
 from todo_list.models import (
@@ -23,6 +24,17 @@ def index(request):
 class TaskCreate(generic.CreateView):
     model = Task
     form_class = TaskCreatedForm
+    success_url = reverse_lazy("todo_list:index")
+
+
+class TaskUpdate(generic.UpdateView):
+    model = Task
+    form_class = TaskUpdateForm
+    success_url = reverse_lazy("todo_list:index")
+
+
+class TaskDelete(generic.DeleteView):
+    model = Task
     success_url = reverse_lazy("todo_list:index")
 
 

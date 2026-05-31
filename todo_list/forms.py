@@ -3,6 +3,16 @@ from django import forms
 from todo_list.models import Tag, Task
 
 
+class TaskUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = [
+            "content",
+            "deadline",
+            "tag"
+        ]
+
+
 class TaskCreatedForm(forms.ModelForm):
     class Meta:
         model = Task
