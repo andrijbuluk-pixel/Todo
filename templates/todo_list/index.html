@@ -14,7 +14,7 @@
 
 				{% if todo.done == True %}
 					<span class="text-success">{{ todo.done }}</span>
-					<p class="h6">Created: {{ todo.datetime }} - Deadline: {{ todo.deadline }}</p>
+					<p class="h6">Created: {{ todo.datetime }}</p>
 
 					<form method="post" action="{% url 'todo_list:task-toggle' pk=todo.id %}">
 						{% csrf_token %}
@@ -23,7 +23,7 @@
 
 				{% else %}
 					<span class="text-danger">{{ todo.done }}</span>
-					<p class="h6">Created: {{ todo.datetime }}</p>
+					<p class="h6">Created: {{ todo.datetime }} - Deadline: {{ todo.deadline }}</p>
 
 					<form method="post" action="{% url 'todo_list:task-toggle' pk=todo.id %}">
 						{% csrf_token %}
