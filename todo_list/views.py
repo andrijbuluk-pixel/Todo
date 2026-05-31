@@ -2,8 +2,15 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from todo_list.forms import TagForm
-from todo_list.models import Task, Tag
+from todo_list.forms import (
+    TagForm,
+    TagCreatedForm,
+)
+
+from todo_list.models import (
+    Task,
+    Tag,
+)
 
 
 def index(request):
@@ -18,6 +25,12 @@ class TagList(generic.ListView):
     template_name = "todo_list/tag_list.html"
 
 
+class TagCreate(generic.CreateView):
+    model = Tag
+    form_class = TagCreatedForm
+    success_url = reverse_lazy("todo_list:tag-list")
+
+
 class TagUpdate(generic.UpdateView):
     model = Tag
     form_class = TagForm
@@ -26,4 +39,4 @@ class TagUpdate(generic.UpdateView):
 
 class TagDelete(generic.DeleteView):
     model = Tag
-    success_url = reverse_lazy("todo_list:tag_list")
+    success_url = reverse_lazy("todo_list:tag-list")
