@@ -1,3 +1,5 @@
+{% load django_bootstrap5 %}
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,13 +9,29 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 	{% block title %}
-	<title>TODO list</title>
+		<title>TODO list</title>
 	{% endblock %}
 
+	{% bootstrap_css %}
 </head>
 <body>
-	{% block content %}
-		
-	{% endblock %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-2">
+
+			{% block sidebar %}
+				{% include "include/sidebar.html" %}
+			{% endblock %}
+
+		</div>
+		<div class="col-sm-10 ">
+
+			{% block content %}
+
+			{% endblock %}
+
+		</div>
+	</div>
+</div>
 </body>
 </html>
