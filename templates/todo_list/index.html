@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+	<h1>TODO list
+		<a class="btn btn-primary link-to-page" href="{% url 'todo_list:task-create' %}">Add task</a>
+	</h1>
+
+	<hr>
+
+	<div>
+		{% for todo in todo_list %}
+			<h4>{{ todo.content }}
+
+				{% if todo.done == True %}
+					<span class="text-success">{{ todo.done }}</span>
+					<p class="h6">Created: {{ todo.datetime }}</p>
+
+					<form method="post" action="{% url 'todo_list:task-toggle' pk=todo.id %}">
+						{% csrf_token %}
+						<button class="btn-secondary" type="submit">Undo</button>
+					</form>
+
+				{% else %}
+					<span class="text-danger">{{ todo.done }}</span>
+					<p class="h6">Created: {{ todo.datetime }} - Deadline: {{ todo.deadline }}</p>
+
+					<form method="post" action="{% url 'todo_list:task-toggle' pk=todo.id %}">
+						{% csrf_token %}
+						<button class="btn-success" type="submit">Complete</button>
+					</form>
+
+				{% endif %}
+			</h4>
+			<p class="h5 text-secondary">Tag:
+				{% for tag in todo.tag.all %}
+					<span>{{ tag.name }}</span>
+				{% endfor %}
+
+				<spaan><a href="{% url 'todo_list:task-update' pk=todo.id %}">| Update -</a></spaan>
+				<spaan><a href="{% url 'todo_list:task-delete' pk=todo.id %}"> Delete |</a></spaan>
+
+			</p>
+
+			<hr>
+		{% endfor %}
+	</div>
+{% endblock %}
