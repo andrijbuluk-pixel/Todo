@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views import generic
 
+from todo_list.forms import TagForm
 from todo_list.models import Task, Tag
 
 
@@ -10,7 +12,18 @@ def index(request):
     return render(request, "todo_list/index.html", context={"todo_list": list_todo})
 
 
-class TagList(ListView):
+class TagList(generic.ListView):
     model = Tag
     context_object_name = "tag_list"
     template_name = "todo_list/tag_list.html"
+
+
+class TagUpdate(generic.UpdateView):
+    model = Tag
+    form_class = TagForm
+    success_url = reverse_lazy("todo_list:tag-list")
+
+
+class TagDelete(generic.DeleteView):
+    model = Tag
+    success_url = reverse_lazy("todo_list:tag_list")
