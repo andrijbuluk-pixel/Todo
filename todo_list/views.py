@@ -16,7 +16,7 @@ from todo_list.models import (
 
 
 def index(request):
-    list_todo = Task.objects.all().order_by("-deadline")
+    list_todo = Task.objects.all().order_by("-datetime")
 
 
     return render(request, "todo_list/index.html", context={"todo_list": list_todo})
