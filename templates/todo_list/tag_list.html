@@ -1,5 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-	<h1>Tag list</h1>
+	<h1>Tags</h1>
+
+	{% if tag_list %}
+		<table class="table">
+			<tr>
+				<th>Name</th>
+				<th>Update</th>
+				<th>Delete</th>
+			</tr>
+			{% for tag in tag_list %}
+				<tr>
+					<td>{{ tag.name }}</td>
+					<td>Update</td>
+					<td>Delete</td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% else %}
+		<p>Not a single tag was found</p>
+	{% endif %}
 {% endblock %}
