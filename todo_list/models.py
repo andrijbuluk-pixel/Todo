@@ -16,4 +16,4 @@ class Task(models.Model):
     tag = models.ManyToManyField(Tag)
 
     def __str__(self):
-        return f"{self.content}. {self.datetime} - {self.deadline}, {self.done}"
+        return f"{self.content} {self.tag}. {self.datetime} - {self.deadline}, {self.done}"
