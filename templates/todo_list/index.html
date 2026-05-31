@@ -5,4 +5,15 @@
 	<h1>TODO list
 		<a>Add task</a>
 	</h1>
+
+	{% for todo in todo_list %}
+		<h3>{{ todo.content }} <span>{{ todo.done }}</span></h3>
+		<p>Created: {{ todo.datetime }}</p>
+		<p>Tag:
+			{% for tag in todo.tag.all %}
+				<span>{{ tag.name }}</span>
+			{% endfor %}
+		</p>
+	{% endfor %}
+
 {% endblock %}
