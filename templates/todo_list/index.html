@@ -3,7 +3,7 @@
 
 {% block content %}
 	<h1>TODO list
-		<a>Add task</a>
+		<a class="btn btn-primary link-to-page" href="{% url 'todo_list:task-create' %}">Add task</a>
 	</h1>
 
 	<hr>
@@ -14,16 +14,21 @@
 
 				{% if todo.done == True %}
 					<span class="text-success">{{ todo.done }}</span>
+					<p class="h6">Created: {{ todo.datetime }} - Deadline: {{ todo.deadline }}</p>
 				{% else %}
 					<span class="text-danger">{{ todo.done }}</span>
+					<p class="h6">Created: {{ todo.datetime }}</p>
 				{% endif %}
 
 			</h4>
-			<p>Created: {{ todo.datetime }}</p>
-			<p class="h4 text-secondary">Tag:
+			<p class="h5 text-secondary">Tag:
 				{% for tag in todo.tag.all %}
 					<span>{{ tag.name }}</span>
 				{% endfor %}
+
+				<spaan><a>| Update - </a></spaan>
+				<spaan><a>Delete |</a></spaan>
+
 			</p>
 			<hr>
 		{% endfor %}

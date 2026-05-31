@@ -5,6 +5,7 @@ from django.views import generic
 from todo_list.forms import (
     TagForm,
     TagCreatedForm,
+    TaskCreatedForm,
 )
 
 from todo_list.models import (
@@ -17,6 +18,12 @@ def index(request):
     list_todo = Task.objects.all()
 
     return render(request, "todo_list/index.html", context={"todo_list": list_todo})
+
+
+class TaskCreate(generic.CreateView):
+    model = Task
+    form_class = TaskCreatedForm
+    success_url = reverse_lazy("todo_list:index")
 
 
 class TagList(generic.ListView):

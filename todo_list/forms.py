@@ -1,6 +1,23 @@
 from django import forms
 
-from todo_list.models import Tag
+from todo_list.models import Tag, Task
+
+
+class TaskCreatedForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = [
+            "content",
+            "deadline",
+            "tag",
+        ]
+
+        widgets = {
+            "deadline": forms.DateInput(
+                attrs={"type": "date", "class": "form-control"},
+                format="%Y-%m-%d",
+            ),
+        }
 
 
 class TagForm(forms.ModelForm):
